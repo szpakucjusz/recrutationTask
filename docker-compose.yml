@@ -1,0 +1,67 @@
+version: '3'
+services:
+  #PHP Service
+  app-recrutation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: app-recrutation
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app-recrutation
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/certs/:/etc/ssl/certs/
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver-recrutation:
+    image: nginx:alpine
+    container_name: webserver-recrutation
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "82:80"
+      - "443:443"
+    expose:
+      - "80"
+      - "443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./certs/:/etc/ssl/certs/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db-recrutation:
+    image: mysql:5.7.22
+    container_name: db-recrutation
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3307"
+    environment:
+      MYSQL_DATABASE: db-recrutation
+      MYSQL_ROOT_PASSWORD: test
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
