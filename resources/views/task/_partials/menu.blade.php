@@ -3,7 +3,7 @@
     <ul>
         <li>
             <a href="/task">Tasks list</a>
-            <a href="/create">Add Task</a>
+            <a href="/task/create">Add Task</a>
         </li>
     </ul>
 </div>

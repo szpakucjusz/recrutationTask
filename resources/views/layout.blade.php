@@ -40,6 +40,7 @@
         </div>
     </div>
 </nav>
+@include('_partials.flash-message')
 <section class="main-content">
     @yield('content')
 </section>

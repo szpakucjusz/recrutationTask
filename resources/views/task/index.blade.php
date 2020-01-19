@@ -1,5 +1,5 @@
 @extends('layout')
 
-<section>
+@section('content')
     @include('task._partials.menu')
-</section>
+@endsection
