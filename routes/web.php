@@ -14,6 +14,12 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+use App\Model\Task;
+use http\Client\Response;
+use Symfony\Component\Console\Input\Input;
+
 Route::resource('/', 'IndexController');
 Route::resource('task', 'TaskController');
 Auth::routes();
+
+Route::post('tasks/repriority', 'TasksController@repriorities');

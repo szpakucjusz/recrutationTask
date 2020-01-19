@@ -14,7 +14,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('task.index', ['tasks' => Task::all()]);
+        return view('task.index', ['tasks' => Task::orderBy('priority', 'DESC')->get()]);
     }
 
     public function create()

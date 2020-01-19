@@ -6,6 +6,10 @@
     <title>@yield('title', 'Static generator')</title>
     <link rel='stylesheet' href='/css/app.css' type='text/css' media='all'>
     <link rel='stylesheet' href='/css/styles.css' type='text/css' media='all'>
+    <link rel='stylesheet' href='/css/jquery-ui.min.css' type='text/css' media='all'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    @yield('metaCsrf', '')
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
