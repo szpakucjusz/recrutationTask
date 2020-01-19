@@ -33,14 +33,15 @@ class TaskController extends Controller
         return 'show';
     }
 
-    public function edit($id)
+    public function edit(Task $task)
     {
-        return 'edit';
+        return view('task.update', ['task' => $task]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        return 'update';
+        $task->update($request->all());
+        return redirect('/task')->with('success', 'Successfully updated task with name: ' . $request['name']);
     }
 
     public function destroy(Task $task)

@@ -22,7 +22,7 @@
                 <td>{{ $task->priority }}</td>
                 <td>{{ $task->created_at }}</td>
                 <td>{{ $task->updated_at }}</td>
-                <td><a href="task/edit/{{ $task->id }}">Edit</a></td>
+                <td><a href="task/{{ $task->id }}/edit">Edit</a></td>
                 <td>
                     <form method="POST" action="task/{{ $task->id }}">
                         @method('DELETE'){{ csrf_field() }}
