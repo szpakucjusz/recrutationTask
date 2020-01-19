@@ -14,3 +14,6 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::resource('/', 'IndexController');
+Route::resource('task', 'TaskController');
+Auth::routes();
