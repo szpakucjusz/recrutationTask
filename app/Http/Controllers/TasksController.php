@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Project;
 use App\Model\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Symfony\Component\Console\Input\Input;
 
 /**
  * Class TaskController
@@ -13,9 +12,19 @@ use Symfony\Component\Console\Input\Input;
  */
 class TasksController extends Controller
 {
+    public function list(Request $request)
+    {
+        if ($request->get('project')) {
+            $tasks = Task::where('project_id', $request->get('project'))->orderBy('priority', 'DESC')->get();
+        } else {
+            $tasks = Task::orderBy('priority', 'DESC')->get();
+        }
+        return view('task.index', ['tasks' => $tasks, 'projects' => Project::all()]);
+    }
+
     public function repriorities(Request $request)
     {
-        if($request->get('ids')) {
+        if ($request->get('ids')) {
             $i = count($request->get('ids'));
             foreach($request->get('ids') as $id)
             {

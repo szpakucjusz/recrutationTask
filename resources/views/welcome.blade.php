@@ -1,10 +1,10 @@
 @extends('layout')
 
 @section('content')
-    <div>
+    <div class="container">
     <ul>
         <li>
-            <a href="/task">Tasks list</a>
+            <a href="/tasks">Tasks list</a>
         </li>
     </ul>
 </div>

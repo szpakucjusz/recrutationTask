@@ -26,7 +26,7 @@ class TaskController extends Controller
     public function store(StoreTask $request)
     {
         Task::createWithProject($request);
-        return redirect('/task')->with('success', 'Successfully added task with name: ' . $request['name']);
+        return redirect('/tasks')->with('success', 'Successfully added task with name: ' . $request['name']);
     }
 
     public function show($id)
@@ -42,12 +42,12 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $task->update($request->all());
-        return redirect('/task')->with('success', 'Successfully updated task with name: ' . $request['name']);
+        return redirect('/tasks')->with('success', 'Successfully updated task with name: ' . $request['name']);
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect('/task')->with('success', 'Successfully deleted task with name: ' . $task->name);
+        return redirect('/tasks')->with('success', 'Successfully deleted task with name: ' . $task->name);
     }
 }

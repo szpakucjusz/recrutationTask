@@ -6,7 +6,22 @@
 @section('content')
     @include('task._partials.menu')
 
-    <div>
+    <div class="container">
+        <form method="get" action="/tasks">
+            @method('GET')
+            {{ csrf_field() }}
+            <div>
+                <label for="project">select tasks by project</label>
+                <select name="project" id="project">
+                    @foreach($projects as $project)
+                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <button type="submit">select</button>
+            </div>
+        </form>
         <table class="db">
             <thead>
                 <tr>
@@ -36,7 +51,7 @@
                             <button type="submit">Delete</button>
                         </form>
                     </td>
-                    <td>{{ $task->project ? $task->project->name : '-' }}</td>
+                    <td>{{ $task->project->name }}</td>
                     <td>
                         <a class="handle">Move</a>
                     </td>
@@ -47,13 +62,7 @@
     </div>
     <script>
         $.ajaxSetup({
-
-            headers: {
-
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-            }
-
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
         });
         $('table.db tbody').sortable({
             'containment': 'parent',
