@@ -15,14 +15,4 @@ class Task extends Model
     {
         return $this->belongsTo('App\Model\Project');
     }
-
-    public static function createWithProject(StoreTask $request)
-    {
-        $task = Task::create($request->all());
-        if (0 !== $request->get('project_id')) {
-            $project = Project::find($request->get('project_id'));
-            $project->tasks()->save($task);
-        }
-    }
-
 }
