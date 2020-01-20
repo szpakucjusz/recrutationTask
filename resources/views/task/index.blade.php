@@ -17,6 +17,7 @@
                     <td>updated at</td>
                     <td>edit task</td>
                     <td>delete task</td>
+                    <td>project name</td>
                     <td>Move</td>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                             <button type="submit">Delete</button>
                         </form>
                     </td>
+                    <td>{{ $task->project ? $task->project->name : '-' }}</td>
                     <td>
                         <a class="handle">Move</a>
                     </td>

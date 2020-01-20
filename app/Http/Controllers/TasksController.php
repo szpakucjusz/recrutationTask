@@ -15,21 +15,18 @@ class TasksController extends Controller
 {
     public function repriorities(Request $request)
     {
-        if($request->get('ids'))
-        {
-            $i = count($request->get('ids')) + 1;
+        if($request->get('ids')) {
+            $i = count($request->get('ids'));
             foreach($request->get('ids') as $id)
             {
-                $i--;
                 $item = Task::find($id);
                 $item->priority = $i;
                 $item->save();
+                $i--;
             }
             return json_encode(['success' => true]);
-        }
-        else
-        {
-            return json_encode(['success' => true]);
+        } else {
+            return json_encode(['success' => false]);
         }
     }
 }

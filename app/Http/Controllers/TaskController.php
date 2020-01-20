@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTask;
+use App\Model\Project;
 use App\Model\Task;
 use Illuminate\Http\Request;
 
@@ -19,12 +20,12 @@ class TaskController extends Controller
 
     public function create()
     {
-        return view('task.create');
+        return view('task.create', ['projects' => Project::all()]);
     }
 
     public function store(StoreTask $request)
     {
-        Task::create($request->all());
+        Task::createWithProject($request);
         return redirect('/task')->with('success', 'Successfully added task with name: ' . $request['name']);
     }
 

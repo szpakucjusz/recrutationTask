@@ -27,6 +27,7 @@ class StoreTask extends FormRequest
         return [
             'name' => 'required|unique:task|min:3|max:255',
             'priority' => 'required|integer',
+            'project_id' => 'required|integer|exists:project,id'
         ];
     }
 }
