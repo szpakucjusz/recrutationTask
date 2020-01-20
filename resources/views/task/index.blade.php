@@ -33,7 +33,7 @@
                     <td>edit task</td>
                     <td>delete task</td>
                     <td>project name</td>
-                    <td>Move</td>
+                    <td>Repriority</td>
                 </tr>
             </thead>
             <tbody>
@@ -53,49 +53,11 @@
                     </td>
                     <td>{{ $task->project->name }}</td>
                     <td>
-                        <a class="handle">Move</a>
+                        <a class="handle cursor-grab">Grab&Move</a>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
-    <script>
-        $.ajaxSetup({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-        });
-        $('table.db tbody').sortable({
-            'containment': 'parent',
-            'revert': true,
-            helper: function(e, tr) {
-                var $originals = tr.children();
-                var $helper = tr.clone();
-                $helper.children().each(function(index) {
-                    $(this).width($originals.eq(index).width());
-                });
-                return $helper;
-            },
-            'handle': '.handle',
-            update: function(event, ui) {
-                ids = [];
-                $('.id').each(function() {
-                    ids.push($(this).html());
-                });
-                $.post('/tasks/repriority', {'ids' : ids}, function(data) {
-                    if(!data.success) {
-                        alert('Whoops, something went wrong :/');
-                    } else {
-                        idsLength = $('.priority').length;
-                        $('.priority').each(function() {
-                            $(this).html(idsLength);
-                            idsLength--;
-                        });
-                    }
-                }, 'json');
-            }
-        });
-        $(window).resize(function() {
-            $('table.db tr').css('min-width', $('table.db').width());
-        });
-    </script>
 @endsection
